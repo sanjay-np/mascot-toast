@@ -37,7 +37,7 @@ class Reducer {
      */
     add(message: string, type: ToastType): IToast {
         const toast = {
-            id: this.toasts.length,
+            id: `${Date.now()}-${Math.random()}`,
             state: 'enter',
             type: type,
             title: message,

@@ -31,6 +31,7 @@
     transform: translate3d(0, 200%, 0) scale(0.6);
     opacity: 0.5;
   }
+
   100% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
@@ -42,6 +43,7 @@
     transform: translate3d(0, 0, -1px) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translate3d(0, 150%, -1px) scale(0.6);
     opacity: 0;
@@ -53,6 +55,7 @@
     transform: translate3d(0, -200%, 0) scale(0.6);
     opacity: 0.5;
   }
+
   100% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
@@ -64,6 +67,7 @@
     transform: translate3d(0, 0, -1px) scale(1);
     opacity: 1;
   }
+
   100% {
     transform: translate3d(0, -150%, -1px) scale(0.6);
     opacity: 0;
@@ -74,7 +78,70 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Add to styles.css */
+.toast-dialog-bubble {
+  position: relative;
+}
+
+.mascot-toast-container {
+    position: fixed;
+    z-index: 9999;
+    min-width: 260px;
+    max-width: 360px;
+    display: flex;
+    pointer-events: none;
+}
+
+.mascot-toast-bottom {
+    flex-direction: column;
+    align-items: center;
+}
+
+.mascot-toast-top {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.mascot-toast-left {
+    align-items: flex-start;
+}
+
+.mascot-toast-right {
+    align-items: flex-end;
+}
+
+.mascot-toast-bubble {
+    pointer-events: auto;
+    margin-bottom: 8px;
+}
+
+.mascot-toast-bubble-top {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.mascot-toast-bubble-left {
+    margin-left: 8px;
+}
+
+.mascot-toast-bubble-right {
+    margin-right: 8px;
+}
+
+.mascot-wrapper {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mascot {
+    width: 80px;
+    height: 80px;
 }

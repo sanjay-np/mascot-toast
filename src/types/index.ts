@@ -16,12 +16,16 @@ export type ToasterOptions = ToastOptions & {
     [key in ToastType]?: ToastOptions;
 };
 
+export type MascotPosition = 'left' | 'right' | 'bottom' | 'top';
+
 export interface ToasterProps {
     position?: ToasterPosition;
     options?: ToasterOptions;
     duration?: number;
     theme?: 'light' | 'dark';
-    image?: string;
+    mascotImage?: string;
+    mascotPosition?: MascotPosition;
+    bubbleStyle?: React.CSSProperties;
 }
 
 export interface ToastProps {
@@ -30,7 +34,7 @@ export interface ToastProps {
 }
 
 export interface IToast {
-    id: number;
+    id: string;
     state: ToastState;
     type: ToastType;
     zIndex: number;
