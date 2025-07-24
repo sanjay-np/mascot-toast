@@ -9,7 +9,7 @@ const Toaster = ({
     theme = 'light',
     options,
     mascotImage,
-    mascotPosition = 'bottom',
+    mascotPosition = 'right',  // Change default to 'right'
     bubbleStyle,
 }: ToasterProps) => {
     const [queue, setQueue] = useState<IToast[]>([]);
@@ -45,6 +45,10 @@ const Toaster = ({
         setPositionState({
             [vertical]: 24,
             [horizontal]: 24,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '16px'
         });
     }, [position]);
 
@@ -67,16 +71,16 @@ const Toaster = ({
     return (
         <div
             className={containerClass}
-            style={{
-                ...positionState,
-            }}
+            style={positionState}
         >
-            {/* Bubble */}
+            {mascotPosition === 'left' && mascotImage && (
+                <div className="mascot-wrapper">
+                    <img src={mascotImage} alt="mascot" className="mascot" />
+                </div>
+            )}
+            
             {toastsToShow.length > 0 && (
-                <div
-                    className={bubbleClass}
-                    style={bubbleStyle}
-                >
+                <div className={bubbleClass} style={bubbleStyle}>
                     <Toast
                         key={toastsToShow[0].id}
                         toast={{
@@ -91,14 +95,10 @@ const Toaster = ({
                     />
                 </div>
             )}
-            {/* Mascot */}
-            {mascotImage && (
+            
+            {mascotPosition === 'right' && mascotImage && (
                 <div className="mascot-wrapper">
-                    <img
-                        src={mascotImage}
-                        alt="mascot"
-                        className="mascot"
-                    />
+                    <img src={mascotImage} alt="mascot" className="mascot" />
                 </div>
             )}
         </div>

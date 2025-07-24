@@ -6,8 +6,13 @@ function App() {
             <Toaster
                 theme="light"
                 mascotImage="/owl.png"
-                mascotPosition="right"
-                bubbleStyle={{ background: '#fffbe7', color: '#222', fontSize: '1.2rem' }}
+                position="bottom-right"  // Make sure this is set
+                mascotPosition="right"   // Set to 'left' or 'right'
+                bubbleStyle={{ 
+                    background: '#fffbe7', 
+                    color: '#222', 
+                    fontSize: '1.2rem' 
+                }}
             />
             <button
                 onClick={() => toast('This is a toast.')}

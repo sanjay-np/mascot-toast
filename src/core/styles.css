@@ -96,15 +96,18 @@
     max-width: 360px;
     display: flex;
     pointer-events: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 }
 
 .mascot-toast-bottom {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 
 .mascot-toast-top {
-    flex-direction: column-reverse;
+    flex-direction: row;
     align-items: center;
 }
 
