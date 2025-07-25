@@ -1,4 +1,5 @@
 import { Toaster, toast } from 'mascot-toast'
+import 'mascot-toast/style.css';
 function App() {
 
     return (
@@ -6,13 +7,8 @@ function App() {
             <Toaster
                 theme="light"
                 mascotImage="/owl.png"
-                position="bottom-right"  // Make sure this is set
-                mascotPosition="right"   // Set to 'left' or 'right'
-                bubbleStyle={{ 
-                    background: '#fffbe7', 
-                    color: '#222', 
-                    fontSize: '1.2rem' 
-                }}
+                position="bottom-right"
+                mascotPosition="right"
             />
             <button
                 onClick={() => toast('This is a toast.')}

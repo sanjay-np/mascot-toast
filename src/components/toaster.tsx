@@ -2,21 +2,20 @@ import React, { useEffect, useMemo, useState } from 'react';
 import type { IToast, ToasterProps } from '../types';
 import { Toast } from './toast';
 import { Store } from '../core/store';
-import '../core/styles.css';
+import styles from '../core/styles.module.css';
 
 const Toaster = ({
     position = 'bottom-right',
     theme = 'light',
     options,
     mascotImage,
-    mascotPosition = 'right',  // Change default to 'right'
+    mascotPosition = 'right',
     bubbleStyle,
 }: ToasterProps) => {
     const [queue, setQueue] = useState<IToast[]>([]);
     const [currentToast, setCurrentToast] = useState<IToast | null>(null);
     const [positionState, setPositionState] = useState<React.CSSProperties>({});
 
-    // Subscribe to new toasts
     useEffect(() => {
         const unsubscribe = Store.subscribe((toast) => {
             setQueue((prev) => [...prev, toast]);
@@ -24,22 +23,19 @@ const Toaster = ({
         return unsubscribe;
     }, []);
 
-    // Show one toast at a time
     useEffect(() => {
         if (!currentToast && queue.length > 0) {
             setCurrentToast(queue[0]);
         }
     }, [queue, currentToast]);
 
-    // Remove toast after typing + delay
     function handleTypingEnd() {
         setTimeout(() => {
             setCurrentToast(null);
             setQueue((prev) => prev.slice(1));
-        }, 3000);
+        }, 10000);
     }
 
-    // Position the whole container
     useEffect(() => {
         const [vertical, horizontal] = position.split('-');
         setPositionState({
@@ -52,33 +48,23 @@ const Toaster = ({
         });
     }, [position]);
 
-    // Only show the current toast
     const toastsToShow = useMemo(() => currentToast ? [currentToast] : [], [currentToast]);
-
-    // Build dynamic class names
-    const containerClass = [
-        'mascot-toast-container',
-        `mascot-toast-${mascotPosition}`,
-        `mascot-toast-${position}`
-    ].join(' ');
 
     const bubbleClass = [
         'mascot-toast-bubble',
         `mascot-toast-bubble-${mascotPosition}`
     ].join(' ');
 
-    // Layout: mascot at bottom, bubble above (default)
     return (
-        <div
-            className={containerClass}
-            style={positionState}
-        >
+        <div className={`${styles.mascot_toast_container}  ${styles.mascot_toast_position_bottom_right} `}>
+            <div style={positionState}></div>
+
             {mascotPosition === 'left' && mascotImage && (
                 <div className="mascot-wrapper">
                     <img src={mascotImage} alt="mascot" className="mascot" />
                 </div>
             )}
-            
+
             {toastsToShow.length > 0 && (
                 <div className={bubbleClass} style={bubbleStyle}>
                     <Toast
@@ -95,7 +81,7 @@ const Toaster = ({
                     />
                 </div>
             )}
-            
+
             {mascotPosition === 'right' && mascotImage && (
                 <div className="mascot-wrapper">
                     <img src={mascotImage} alt="mascot" className="mascot" />
