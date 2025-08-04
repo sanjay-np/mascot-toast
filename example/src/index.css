@@ -13,16 +13,4 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.mascot-wrapper {
-    width:100px;
-    height:100px;
-    position:fixed;
-    bottom:0;
-    right:1rem;
-}
-
-.mascot-wrapper img {
-    width:100%;
-    height:100%;
-}
 

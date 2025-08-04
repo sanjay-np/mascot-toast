@@ -1,27 +1,37 @@
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { defineConfig } from 'vite';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), tailwindcss(), cssInjectedByJsPlugin()],
     build: {
+        emptyOutDir: false,
         lib: {
-            entry: resolve(__dirname, 'src/index.ts'),
-            name: "Mascot Toast",
-            fileName: "mascot-toast",
+            entry: resolve(__dirname, 'lib/index.ts'),
+            name: 'AnotherReactComponentLibrary',
+            fileName: (format) => (format === 'es' ? 'index.js' : 'index.cjs'),
         },
         rollupOptions: {
-            external: ['react', 'react-dom'], // don't bundle peer deps
+            // make sure to externalize deps that shouldn't be bundled
+            // into your library
+            external: ['react', 'react-dom'],
             output: {
+                // Provide global variables to use in the UMD build
+                // for externalized deps
                 globals: {
                     react: 'React',
                     'react-dom': 'ReactDOM',
                 },
             },
         },
-    }
-})
+    },
+    resolve: {
+        alias: {},
+    },
+});
